@@ -1,6 +1,7 @@
 package fr.cdudit.playgroundfinder
 
 import android.app.Application
+import fr.cdudit.playgroundfinder.api.repositories.playground.PlaygroundRepository
 import fr.cdudit.playgroundfinder.features.home.HomeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -13,11 +14,15 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(listOf(viewModels))
+            modules(listOf(viewModels, repositories))
         }
     }
 }
 
 val viewModels = module {
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get()) }
+}
+
+val repositories = module {
+    single { PlaygroundRepository() }
 }
