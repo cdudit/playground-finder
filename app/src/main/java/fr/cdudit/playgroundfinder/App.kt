@@ -3,6 +3,7 @@ package fr.cdudit.playgroundfinder
 import android.app.Application
 import fr.cdudit.playgroundfinder.api.repositories.playground.PlaygroundRepository
 import fr.cdudit.playgroundfinder.features.home.HomeViewModel
+import fr.cdudit.playgroundfinder.features.map.MapViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -21,6 +22,8 @@ class App : Application() {
 
 val viewModels = module {
     viewModel { HomeViewModel(get()) }
+    viewModel { MapViewModel() }
+
 }
 
 val repositories = module {
