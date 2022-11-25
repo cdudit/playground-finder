@@ -8,9 +8,15 @@ import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 
 class PlaygroundListViewModel(private val playgroundRepository: PlaygroundRepository) : ViewModel() {
-    fun getPlaygrounds(onSuccess: (PlaygroundApi?) -> Unit, onError: (ResponseBody?) -> Unit) {
+    fun getPlaygrounds(
+        ageMin: Int?,
+        ageMax: Int?,
+        search: String?,
+        onSuccess: (PlaygroundApi?) -> Unit,
+        onError: (ResponseBody?) -> Unit
+    ) {
         viewModelScope.launch {
-            val response = playgroundRepository.getPlaygroundList()
+            val response = playgroundRepository.getPlaygroundList(ageMin, ageMax, search)
             if (response.isSuccessful) {
                 onSuccess(response.body())
             } else {
