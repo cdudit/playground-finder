@@ -20,8 +20,17 @@ class PlaygroundListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         this.binding = FragmentPlaygroundListBinding.inflate(layoutInflater, container, false)
         this.initRecyclerView()
+        this.initListeners()
         this.getPlaygrounds()
         return this.binding.root
+    }
+
+    private fun initListeners() {
+        this.binding.imageButtonFilter.setOnClickListener {
+            PlaygroundListFilterBottomSheetFragment().show(
+                childFragmentManager, PlaygroundListFilterBottomSheetFragment.TAG
+            )
+        }
     }
 
     private fun initRecyclerView() {

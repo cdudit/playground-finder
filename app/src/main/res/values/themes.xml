@@ -12,9 +12,26 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:progressBarStyle">@style/ProgressBarStyle</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetTheme</item>
     </style>
 
     <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar">
         <item name="android:indeterminateTint">@color/dark_blue</item>
+    </style>
+
+    <style name="BottomSheetTheme" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
+    </style>
+
+    <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">13dp</item>
+        <item name="cornerSizeTopLeft">13dp</item>
+        <item name="cornerSizeBottomRight">13dp</item>
+        <item name="cornerSizeBottomLeft">13dp</item>
     </style>
 </resources>

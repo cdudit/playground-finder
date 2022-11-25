@@ -4,4 +4,9 @@
     <string name="playgrounds">Aires de jeux</string>
 
     <string name="playground_list_item_desc">• %1s m² • %2s jeux</string>
+    <string name="filter_icon">Filter icon</string>
+    <string name="search">Rechercher</string>
+    <string name="age_min">Age minimum</string>
+    <string name="age_max">Age maximum</string>
+    <string name="search_playground">Rechercher un parc</string>
 </resources>
