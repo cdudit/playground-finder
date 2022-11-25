@@ -28,7 +28,6 @@ data class Fields(
     @SerializedName("age_max")      val ageMax: Int,
     @SerializedName("age_min")      val ageMin: Double,
     @SerializedName("geo_point_2d") val geoPoint2d: List<Double>,
-    @SerializedName("geo_shape")    val geoShape: GeoShape,
     @SerializedName("gid")          val gid: Int,
     @SerializedName("gml_id")       val gmlId: String,
     @SerializedName("nb_jeux")      val gameNumber: Int,
@@ -38,10 +37,5 @@ data class Fields(
 
 data class Geometry(
     @SerializedName("coordinates")  val coordinates: List<Double>,
-    @SerializedName("type")         val type: String
-)
-
-data class GeoShape(
-    @SerializedName("coordinates")  val coordinates: List<List<List<Double>>>,
     @SerializedName("type")         val type: String
 )

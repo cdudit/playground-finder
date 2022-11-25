@@ -16,4 +16,10 @@
         android:name="fr.cdudit.playgroundfinder.features.tabbar.TabBarFragment"
         android:label="fragment_tabbar"
         tools:layout="@layout/fragment_tab_bar" />
+
+    <fragment
+        android:id="@+id/playgroundListFragment"
+        android:name="fr.cdudit.playgroundfinder.features.list.PlaygroundListFragment"
+        android:label="fragment_playground_list"
+        tools:layout="@layout/fragment_playground_list" />
 </navigation>
