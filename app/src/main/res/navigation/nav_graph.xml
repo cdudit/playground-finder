@@ -6,14 +6,20 @@
     app:startDestination="@id/tabBarFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="fr.cdudit.playgroundfinder.features.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
         android:id="@+id/tabBarFragment"
         android:name="fr.cdudit.playgroundfinder.features.tabbar.TabBarFragment"
         android:label="fragment_tabbar"
         tools:layout="@layout/fragment_tab_bar" />
+
+    <fragment
+        android:id="@+id/playgroundListFragment"
+        android:name="fr.cdudit.playgroundfinder.features.list.PlaygroundListFragment"
+        android:label="fragment_playground_list"
+        tools:layout="@layout/fragment_playground_list" />
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="fr.cdudit.playgroundfinder.features.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map"/>
 </navigation>

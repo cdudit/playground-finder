@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface PlaygroundService {
-    @GET("search/?dataset=bor_airejeux")
+    @GET("search/?dataset=bor_airejeux&rows=20")
     suspend fun getPlaygroundList(): Response<PlaygroundApi>
 }

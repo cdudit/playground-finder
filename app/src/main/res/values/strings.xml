@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">PlaygroundFinder</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="playgrounds">Aires de jeux</string>
+
+    <string name="playground_list_item_desc">• %1s m² • %2s jeux</string>
 </resources>

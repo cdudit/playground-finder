@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainer
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import fr.cdudit.playgroundfinder.adapters.TabPageAdapter
-import fr.cdudit.playgroundfinder.databinding.FragmentHomeBinding
 import fr.cdudit.playgroundfinder.databinding.FragmentTabBarBinding
 
 class TabBarFragment : Fragment() {
