@@ -21,8 +21,7 @@ class App : Application() {
 }
 
 val viewModels = module {
-    viewModel { MapViewModel() }
-
+    viewModel { MapViewModel(get()) }
     viewModel { PlaygroundListViewModel(get()) }
 }
 
