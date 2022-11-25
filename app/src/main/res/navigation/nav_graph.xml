@@ -3,11 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/tabBarFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="fr.cdudit.playgroundfinder.features.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/tabBarFragment"
+        android:name="fr.cdudit.playgroundfinder.features.tabbar.TabBarFragment"
+        android:label="fragment_tabbar"
+        tools:layout="@layout/fragment_tab_bar" />
 </navigation>
