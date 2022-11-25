@@ -46,8 +46,8 @@
 
             <ImageButton
                 android:id="@+id/imageButtonFilter"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/playground_list_filter_icon_size"
+                android:layout_height="@dimen/playground_list_filter_icon_size"
                 android:background="@null"
                 android:contentDescription="@string/filter_icon"
                 android:scaleType="centerInside"

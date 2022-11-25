@@ -4,6 +4,7 @@
     <dimen name="playground_list_container_padding">16dp</dimen>
     <dimen name="playground_list_recycler_view_margin_top">16dp</dimen>
     <dimen name="playground_list_recycler_view_padding">8dp</dimen>
+    <dimen name="playground_list_filter_icon_size">25dp</dimen>
     <!--endregion-->
 
     <!--region PLAYGROUND LIST ITEM-->
@@ -11,5 +12,16 @@
     <dimen name="playground_list_item_address_margin_horizontal">4dp</dimen>
     <dimen name="playground_list_item_description_margin_top">8dp</dimen>
     <dimen name="playground_list_item_chevron_padding">5dp</dimen>
+    <dimen name="playground_list_item_chevron_width">20dp</dimen>
+    <!--endregion-->
+
+    <!--region PLAYGROUND BOTTOM SHEET-->
+    <dimen name="bottom_sheet_filter_radius">13dp</dimen>
+    <dimen name="bottom_sheet_filter_container">16dp</dimen>
+    <dimen name="bottom_sheet_filter_ages_margin_bottom">8dp</dimen>
+    <dimen name="bottom_sheet_filter_margin">4dp</dimen>
+    <dimen name="bottom_sheet_filter_search_margin_bottom">8dp</dimen>
+    <dimen name="bottom_sheet_filter_search_drawable_padding">4dp</dimen>
+    <dimen name="bottom_sheet_filter_search_padding">10dp</dimen>
     <!--endregion-->
 </resources>

@@ -29,9 +29,9 @@
 
     <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">13dp</item>
-        <item name="cornerSizeTopLeft">13dp</item>
-        <item name="cornerSizeBottomRight">13dp</item>
-        <item name="cornerSizeBottomLeft">13dp</item>
+        <item name="cornerSizeTopRight">@dimen/bottom_sheet_filter_radius</item>
+        <item name="cornerSizeTopLeft">@dimen/bottom_sheet_filter_radius</item>
+        <item name="cornerSizeBottomRight">@dimen/bottom_sheet_filter_radius</item>
+        <item name="cornerSizeBottomLeft">@dimen/bottom_sheet_filter_radius</item>
     </style>
 </resources>
