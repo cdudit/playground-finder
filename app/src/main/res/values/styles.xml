@@ -5,4 +5,13 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!--region PLAYGROUND LIST FILTERS-->
+    <style name="AgeFilter">
+        <item name="android:background">@drawable/playground_filter_age_background</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingVertical">10dp</item>
+    </style>
+    <!--endregion-->
 </resources>

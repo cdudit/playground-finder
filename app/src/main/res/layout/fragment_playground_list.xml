@@ -43,6 +43,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/imageButtonFilter"
+                android:layout_width="@dimen/playground_list_filter_icon_size"
+                android:layout_height="@dimen/playground_list_filter_icon_size"
+                android:background="@null"
+                android:contentDescription="@string/filter_icon"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_filter"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPlaygroundsTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlaygroundsTitle"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>

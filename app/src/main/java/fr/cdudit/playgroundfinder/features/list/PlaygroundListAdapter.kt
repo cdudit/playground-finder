@@ -29,7 +29,7 @@ class PlaygroundListAdapter(
                 item.fields.gameNumber.toString()
             )
             binding.root.setOnClickListener {
-                TODO("Go to the playground's detail, not implemented yet")
+                // TODO : Go to the playground's detail, not implemented yet"
             }
         }
     }

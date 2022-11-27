@@ -35,7 +35,7 @@
 
         <ImageView
             android:id="@+id/imageViewNext"
-            android:layout_width="20dp"
+            android:layout_width="@dimen/playground_list_item_chevron_width"
             android:layout_height="0dp"
             android:padding="@dimen/playground_list_item_chevron_padding"
             app:layout_constraintBottom_toBottomOf="@+id/textViewItemTitle"

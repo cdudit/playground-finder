@@ -20,8 +20,18 @@ class PlaygroundListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         this.binding = FragmentPlaygroundListBinding.inflate(layoutInflater, container, false)
         this.initRecyclerView()
+        this.initListeners()
         this.getPlaygrounds()
         return this.binding.root
+    }
+
+    private fun initListeners() {
+        val bottomSheetFragment = PlaygroundListFilterBottomSheetFragment.newInstance { ageMin, ageMax, search ->
+            getPlaygrounds(ageMin, ageMax, search)
+        }
+        this.binding.imageButtonFilter.setOnClickListener {
+            bottomSheetFragment.show(childFragmentManager, PlaygroundListFilterBottomSheetFragment.TAG)
+        }
     }
 
     private fun initRecyclerView() {
@@ -29,9 +39,13 @@ class PlaygroundListFragment : Fragment() {
         this.binding.recyclerViewPlaygrounds.adapter = this.adapter
     }
 
-    private fun getPlaygrounds() {
+    private fun getPlaygrounds(ageMin: Int? = null, ageMax: Int? = null, search: String? = null) {
+        clearList()
         this.binding.progressBar.isVisible = true
         this.viewModel.getPlaygrounds(
+            ageMin,
+            ageMax,
+            search,
             onSuccess = { playgroundApi ->
                 playgroundApi?.records?.let {
                     playgrounds.addAll(it)
@@ -44,5 +58,11 @@ class PlaygroundListFragment : Fragment() {
                 this.binding.progressBar.isVisible = false
             }
         )
+    }
+
+    private fun clearList() {
+        val removedSize = this.playgrounds.size
+        this.playgrounds.clear()
+        this.adapter.notifyItemRangeRemoved(0, removedSize)
     }
 }
