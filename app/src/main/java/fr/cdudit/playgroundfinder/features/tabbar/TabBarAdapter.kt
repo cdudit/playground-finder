@@ -1,4 +1,4 @@
-package fr.cdudit.playgroundfinder.adapters
+package fr.cdudit.playgroundfinder.features.tabbar
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import fr.cdudit.playgroundfinder.features.list.PlaygroundListFragment
 import fr.cdudit.playgroundfinder.features.map.MapFragment
 
-class TabPageAdapter(activity: FragmentActivity, private  val tabCount: Int) : FragmentStateAdapter(activity) {
+class TabBarAdapter(activity: FragmentActivity, private  val tabCount: Int) : FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int = tabCount
 

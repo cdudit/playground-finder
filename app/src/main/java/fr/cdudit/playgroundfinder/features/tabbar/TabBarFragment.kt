@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
-import fr.cdudit.playgroundfinder.adapters.TabPageAdapter
 import fr.cdudit.playgroundfinder.databinding.FragmentTabBarBinding
 
 class TabBarFragment : Fragment() {
@@ -27,8 +26,10 @@ class TabBarFragment : Fragment() {
 
 
     private fun setUpTabBar() {
-        val adapter = TabPageAdapter(this.requireActivity() , binding.tabLayout.tabCount)
+        val adapter = TabBarAdapter(this.requireActivity() , binding.tabLayout.tabCount)
         binding.viewPager.adapter = adapter
+
+        binding.viewPager.isUserInputEnabled = false
 
         binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {

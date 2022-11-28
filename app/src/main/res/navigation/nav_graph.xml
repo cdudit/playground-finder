@@ -22,4 +22,5 @@
         android:name="fr.cdudit.playgroundfinder.features.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map"/>
+
 </navigation>
