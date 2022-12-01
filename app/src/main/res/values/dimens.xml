@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="text_size_xlarge">24sp</dimen>
+
     <!--region PLAYGROUND LIST-->
     <dimen name="playground_list_container_padding">16dp</dimen>
     <dimen name="playground_list_recycler_view_margin_top">16dp</dimen>
     <dimen name="playground_list_recycler_view_padding">8dp</dimen>
     <dimen name="playground_list_filter_icon_size">25dp</dimen>
+    <dimen name="playground_list_radius">13dp</dimen>
     <!--endregion-->
 
     <!--region PLAYGROUND LIST ITEM-->
@@ -18,10 +21,31 @@
     <!--region PLAYGROUND BOTTOM SHEET-->
     <dimen name="bottom_sheet_filter_radius">13dp</dimen>
     <dimen name="bottom_sheet_filter_container">16dp</dimen>
+    <dimen name="bottom_sheet_filter_age_radius">13dp</dimen>
     <dimen name="bottom_sheet_filter_ages_margin_bottom">8dp</dimen>
+    <dimen name="bottom_sheet_filter_age_padding_vertical">10dp</dimen>
     <dimen name="bottom_sheet_filter_margin">4dp</dimen>
     <dimen name="bottom_sheet_filter_search_margin_bottom">8dp</dimen>
     <dimen name="bottom_sheet_filter_search_drawable_padding">4dp</dimen>
     <dimen name="bottom_sheet_filter_search_padding">10dp</dimen>
+    <dimen name="bottom_sheet_filter_search_size">18dp</dimen>
+    <dimen name="bottom_sheet_filter_search_radius">13dp</dimen>
+    <!--endregion-->
+
+    <!--region PLAYGROUND DETAIL-->
+    <dimen name="playground_detail_container_padding">16dp</dimen>
+    <dimen name="playground_detail_go_back_width">48dp</dimen>
+    <dimen name="playground_detail_title_margin_end">16dp</dimen>
+    <dimen name="playground_detail_tile_container_margin_top">16dp</dimen>
+    <dimen name="playground_detail_tile_padding_horizontal">16dp</dimen>
+    <dimen name="playground_detail_tile_min_age_margin_end">8dp</dimen>
+    <dimen name="playground_detail_tile_max_age_margin_horizontal">4dp</dimen>
+    <dimen name="playground_detail_tile_surface_margin_start">8dp</dimen>
+    <dimen name="playground_detail_tile_radius">16dp</dimen>
+    <dimen name="playground_detail_tile_padding">10dp</dimen>
+    <dimen name="playground_detail_tile_text_size">18sp</dimen>
+    <dimen name="playground_detail_map_margin">16dp</dimen>
+    <dimen name="playground_detail_map_radius">16dp</dimen>
+    <dimen name="playground_detail_itinerary_margin_horizontal">16dp</dimen>
     <!--endregion-->
 </resources>

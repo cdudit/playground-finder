@@ -17,7 +17,7 @@
                 android:id="@+id/buttonSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/search"
+                android:text="@string/filter_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -43,7 +43,7 @@
                     android:ems="10"
                     android:imeOptions="actionNext"
                     android:nextFocusDown="@id/editTextMaxAge"
-                    android:hint="@string/age_min"
+                    android:hint="@string/filter_age_min"
                     android:inputType="numberSigned"
                     tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
@@ -58,7 +58,7 @@
                     android:imeOptions="actionNext"
                     android:nextFocusDown="@id/editTextSearch"
                     android:ems="10"
-                    android:hint="@string/age_max"
+                    android:hint="@string/filter_age_max"
                     android:inputType="numberSigned"
                     tools:ignore="LabelFor,TouchTargetSizeCheck" />
             </LinearLayout>
@@ -73,7 +73,7 @@
                 android:drawableStart="@drawable/playground_list_filter_search"
                 android:drawablePadding="@dimen/bottom_sheet_filter_search_drawable_padding"
                 android:ems="10"
-                android:hint="@string/search_playground"
+                android:hint="@string/filter_search_playground"
                 android:imeOptions="actionDone"
                 android:inputType="textPersonName"
                 android:padding="@dimen/bottom_sheet_filter_search_padding"

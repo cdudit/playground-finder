@@ -2,7 +2,7 @@
 <resources>
     <style name="Title">
         <item name="android:textColor">@color/dark_blue</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -11,7 +11,18 @@
         <item name="android:background">@drawable/playground_filter_age_background</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:paddingVertical">10dp</item>
+        <item name="android:paddingVertical">@dimen/bottom_sheet_filter_age_padding_vertical</item>
+    </style>
+    <!--endregion-->
+    
+    <!--region PLAYGROUND DETAIL-->
+    <style name="PlaygroundDetailTile">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/playground_detail_tile_background</item>
+        <item name="android:padding">@dimen/playground_detail_tile_padding</item>
+        <item name="android:textSize">@dimen/playground_detail_tile_text_size</item>
+        <item name="android:textAlignment">center</item>
     </style>
     <!--endregion-->
 </resources>

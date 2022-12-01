@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="@dimen/playground_detail_container_padding">
+
+            <TextView
+                android:id="@+id/textViewPlaygroundTitle"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/playground_detail_title_margin_end"
+                android:maxLines="1"
+                android:ellipsize="marquee"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButtonBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageButtonBack"
+                app:layout_constraintTop_toTopOf="@+id/imageButtonBack"
+                tools:text="TextView" />
+
+            <ImageButton
+                android:id="@+id/imageButtonBack"
+                android:layout_width="@dimen/playground_detail_go_back_width"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="?attr/homeAsUpIndicator"
+                app:tint="@color/dark_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/detail_go_back" />
+
+            <LinearLayout
+                android:id="@+id/tileContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/playground_detail_tile_container_margin_top"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/playground_detail_tile_padding_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlaygroundTitle">
+
+                <TextView
+                    android:id="@+id/textViewDetailMinAge"
+                    style="@style/PlaygroundDetailTile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/playground_detail_tile_min_age_margin_end"
+                    android:layout_weight="1"
+                    tools:text="@string/detail_age" />
+
+                <TextView
+                    android:id="@+id/textViewDetailMaxAge"
+                    style="@style/PlaygroundDetailTile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/playground_detail_tile_max_age_margin_horizontal"
+                    android:layout_weight="1"
+                    tools:text="@string/detail_games" />
+
+                <TextView
+                    android:id="@+id/textViewDetailSurface"
+                    style="@style/PlaygroundDetailTile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/playground_detail_tile_surface_margin_start"
+                    android:layout_weight="1"
+                    tools:text="@string/detail_surface" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/playground_detail_map_margin"
+                app:cardCornerRadius="@dimen/playground_detail_map_radius"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/buttonItinerary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tileContainer">
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/buttonItinerary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/playground_detail_itinerary_margin_horizontal"
+                android:background="@drawable/playground_detail_tile_background"
+                android:text="@string/itinerary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

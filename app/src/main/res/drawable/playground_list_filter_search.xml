@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:height="18dp"
-        android:width="18dp"
+        android:height="@dimen/bottom_sheet_filter_search_size"
+        android:width="@dimen/bottom_sheet_filter_search_size"
         android:drawable="@drawable/ic_search"/>
 </layer-list>

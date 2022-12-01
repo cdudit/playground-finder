@@ -3,10 +3,23 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="playgrounds">Aires de jeux</string>
 
+    <!--region LIST-->
     <string name="playground_list_item_desc">• %1s m² • %2s jeux</string>
+    <!--endregion-->
+
+    <!--region FILTERS-->
     <string name="filter_icon">Filter icon</string>
-    <string name="search">Rechercher</string>
-    <string name="age_min">Age minimum</string>
-    <string name="age_max">Age maximum</string>
-    <string name="search_playground">Rechercher un parc</string>
+    <string name="filter_search">Rechercher</string>
+    <string name="filter_age_min">Age minimum</string>
+    <string name="filter_age_max">Age maximum</string>
+    <string name="filter_search_playground">Rechercher un parc</string>
+    <!--endregion-->
+
+    <!--region DETAIL-->
+    <string name="detail_age">%1s • %2s</string>
+    <string name="detail_games">%1s jeux</string>
+    <string name="detail_surface">%1s m²</string>
+    <string name="detail_go_back">Retour en arrière</string>
+    <string name="itinerary">Itinéraire</string>
+    <!--endregion-->
 </resources>

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import fr.cdudit.playgroundfinder.databinding.FragmentPlaygroundListBinding
+import fr.cdudit.playgroundfinder.features.tabbar.TabBarFragmentDirections
 import fr.cdudit.playgroundfinder.models.Record
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,7 +37,11 @@ class PlaygroundListFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        this.adapter = PlaygroundListAdapter(requireContext(), playgrounds)
+        this.adapter = PlaygroundListAdapter(requireContext(), playgrounds) {
+            findNavController().navigate(
+                TabBarFragmentDirections.navigateToDetailFragment(it)
+            )
+        }
         this.binding.recyclerViewPlaygrounds.adapter = this.adapter
     }
 
