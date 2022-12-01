@@ -2,6 +2,7 @@ package fr.cdudit.playgroundfinder
 
 import android.app.Application
 import fr.cdudit.playgroundfinder.api.repositories.playground.PlaygroundRepository
+import fr.cdudit.playgroundfinder.features.detail.PlaygroundDetailViewModel
 import fr.cdudit.playgroundfinder.features.map.MapViewModel
 import fr.cdudit.playgroundfinder.features.list.PlaygroundListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -23,6 +24,8 @@ class App : Application() {
 val viewModels = module {
     viewModel { MapViewModel(get()) }
     viewModel { PlaygroundListViewModel(get()) }
+
+    viewModel { PlaygroundDetailViewModel() }
 }
 
 val repositories = module {
