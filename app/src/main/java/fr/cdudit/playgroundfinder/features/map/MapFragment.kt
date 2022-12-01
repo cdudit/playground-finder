@@ -6,18 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import fr.cdudit.playgroundfinder.databinding.FragmentMapBinding
-import fr.cdudit.playgroundfinder.features.tabbar.TabBarFragmentDirections
+import fr.cdudit.playgroundfinder.features.map.bottomSheet.MapDetailBottomSheetFragment
 import fr.cdudit.playgroundfinder.models.Record
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MapFragment : Fragment()  {
+class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
     private lateinit var binding: FragmentMapBinding
     private val viewModel: MapViewModel by viewModel()
@@ -55,21 +56,27 @@ class MapFragment : Fragment()  {
                     Toast.makeText(requireContext(), it?.string(), Toast.LENGTH_LONG).show()
                 }
             )
-            //set camera on Bordeaux
-            val cameraPosition = CameraPosition.builder()
-                .target(LatLng(44.837789, -0.57918))
-                .zoom(11F)
-                .build()
-            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-
-            map.uiSettings.isZoomControlsEnabled = true
-            map.setOnInfoWindowClickListener { marker ->
-                records.find { marker.tag == it.recordId }?.let {
-                    findNavController().navigate(
-                        TabBarFragmentDirections.navigateToDetailFragment(it)
-                    )
-                }
-            }
+            this.setupMapUI(map)
         }
+    }
+
+    private fun setupMapUI(map: GoogleMap) {
+        //set camera on Bordeaux
+        val cameraPosition = CameraPosition.builder()
+            .target(LatLng(44.837789, -0.57918))
+            .zoom(11F)
+            .build()
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+
+        map.uiSettings.isZoomControlsEnabled = true
+        map.setOnMarkerClickListener(this)
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        records.find { marker.tag == it.recordId }?.let {
+            val bottomSheet = MapDetailBottomSheetFragment.newInstance(it)
+            bottomSheet.show(childFragmentManager, MapDetailBottomSheetFragment.TAG)
+        }
+        return false
     }
 }

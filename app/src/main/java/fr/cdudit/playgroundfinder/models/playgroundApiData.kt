@@ -23,7 +23,13 @@ data class Record(
     @SerializedName("geometry")         val geometry: Geometry,
     @SerializedName("record_timestamp") val recordTimestamp: String,
     @SerializedName("recordid")         val recordId: String
-) : Serializable
+) : Serializable {
+    fun getGoogleMapsUri(): String {
+        val lat = this.fields.geoPoint2d[0]
+        val long = this.fields.geoPoint2d[1]
+        return "https://maps.google.com/maps?q=loc:${lat},${long}"
+    }
+}
 
 data class Fields(
     @SerializedName("age_max")      val ageMax: Double,

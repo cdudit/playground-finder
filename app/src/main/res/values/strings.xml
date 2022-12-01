@@ -15,10 +15,11 @@
     <!--endregion-->
 
     <!--region DETAIL-->
-    <string name="detail_age">%1s • %2s</string>
+    <string name="detail_age">%1s • %2s ans</string>
     <string name="detail_games">%1s jeux</string>
     <string name="detail_surface">%1s m²</string>
     <string name="detail_go_back">Retour en arrière</string>
     <string name="detail_itinerary">Itinéraire</string>
+    <string name="detail_share_via_sms">Partager via SMS</string>
     <!--endregion-->
 </resources>
