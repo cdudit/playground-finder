@@ -49,5 +49,13 @@
     <dimen name="playground_detail_map_margin">16dp</dimen>
     <dimen name="playground_detail_map_radius">16dp</dimen>
     <dimen name="playground_detail_itinerary_margin_horizontal">16dp</dimen>
+    <dimen name="playground_detail_share_margin_horizontal">16dp</dimen>
+    <dimen name="playground_detail_share_margin_bottom">8dp</dimen>
+    <!--endregion-->
+
+    <!--region MAP BOTTOM SHEET-->
+    <dimen name="map_bottom_sheet_container_padding">16dp</dimen>
+    <dimen name="map_bottom_sheet_title_margin_end">8dp</dimen>
+    <dimen name="map_bottom_sheet_itinerary_margin_top">16dp</dimen>
     <!--endregion-->
 </resources>

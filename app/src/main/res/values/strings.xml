@@ -20,5 +20,6 @@
     <string name="detail_surface">%1s m²</string>
     <string name="detail_go_back">Retour en arrière</string>
     <string name="detail_itinerary">Itinéraire</string>
+    <string name="detail_share_via_sms">Partager via SMS</string>
     <!--endregion-->
 </resources>

@@ -12,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import fr.cdudit.playgroundfinder.databinding.FragmentPlaygroundDetailBinding
+import fr.cdudit.playgroundfinder.managers.ShareManager
 import fr.cdudit.playgroundfinder.models.Record
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,12 +32,16 @@ class PlaygroundDetailFragment : Fragment() {
     }
 
     private fun initListeners() {
+        val geoUri = this.playground.getGoogleMapsUri()
+
         this.binding.imageButtonBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
         this.binding.buttonItinerary.setOnClickListener {
-            val geoUri = "http://maps.google.com/maps?q=loc:${playground.fields.geoPoint2d[0]},${playground.fields.geoPoint2d[1]}"
             requireActivity().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(geoUri)))
+        }
+        this.binding.buttonShare.setOnClickListener {
+            ShareManager.shareViaSMS(requireContext(), geoUri)
         }
     }
 
