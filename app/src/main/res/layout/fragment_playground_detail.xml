@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/playground_detail_itinerary_margin_horizontal"
                 android:background="@drawable/playground_detail_tile_background"
-                android:text="@string/itinerary"
+                android:text="@string/detail_itinerary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

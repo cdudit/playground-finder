@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             tools:text="Aire de jeux n°1"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/playground_list_item_text_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/playground_list_item_address_margin_horizontal"
             android:textColor="#7B7A7A"
-            android:textSize="16sp"
+            android:textSize="@dimen/playground_list_item_text_size"
             android:maxLines="1"
             android:ellipsize="marquee"
             app:layout_constraintBottom_toBottomOf="@+id/textViewItemTitle"

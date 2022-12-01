@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PlaygroundFinder</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="playgrounds">Aires de jeux</string>
 
     <!--region LIST-->
@@ -20,6 +19,6 @@
     <string name="detail_games">%1s jeux</string>
     <string name="detail_surface">%1s m²</string>
     <string name="detail_go_back">Retour en arrière</string>
-    <string name="itinerary">Itinéraire</string>
+    <string name="detail_itinerary">Itinéraire</string>
     <!--endregion-->
 </resources>

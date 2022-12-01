@@ -16,6 +16,7 @@
     <dimen name="playground_list_item_description_margin_top">8dp</dimen>
     <dimen name="playground_list_item_chevron_padding">5dp</dimen>
     <dimen name="playground_list_item_chevron_width">20dp</dimen>
+    <dimen name="playground_list_item_text_size">16sp</dimen>
     <!--endregion-->
 
     <!--region PLAYGROUND BOTTOM SHEET-->

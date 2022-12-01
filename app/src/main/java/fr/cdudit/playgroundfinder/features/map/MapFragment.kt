@@ -6,30 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import fr.cdudit.playgroundfinder.databinding.FragmentMapBinding
+import fr.cdudit.playgroundfinder.features.tabbar.TabBarFragmentDirections
+import fr.cdudit.playgroundfinder.models.Record
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MapFragment : Fragment()  {
 
     private lateinit var binding: FragmentMapBinding
     private val viewModel: MapViewModel by viewModel()
-
+    private val records = arrayListOf<Record>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-
-    ): View? {
+    ): View {
         this.binding = FragmentMapBinding.inflate(layoutInflater, container, false)
         return this.binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,11 +40,14 @@ class MapFragment : Fragment()  {
             this.viewModel.getPlaygrounds(
                 onSuccess = { playgroundApi ->
                     playgroundApi?.records?.let { records ->
-                        records.map {
-                            map.addMarker(
+                        this.records.addAll(records)
+                        records.forEach {
+                            val marker = map.addMarker(
                                 MarkerOptions()
-                                    .position(LatLng(it.fields.geoPoint2d.get(0),it.fields.geoPoint2d.get(1)))
-                                    .title(it.fields.siteName))
+                                    .position(LatLng(it.fields.geoPoint2d[0], it.fields.geoPoint2d[1]))
+                                    .title(it.fields.siteName)
+                            )
+                            marker?.tag = it.recordId
                         }
                     }
                 },
@@ -58,9 +62,14 @@ class MapFragment : Fragment()  {
                 .build()
             map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
+            map.uiSettings.isZoomControlsEnabled = true
+            map.setOnInfoWindowClickListener { marker ->
+                records.find { marker.tag == it.recordId }?.let {
+                    findNavController().navigate(
+                        TabBarFragmentDirections.navigateToDetailFragment(it)
+                    )
+                }
+            }
         }
-
     }
-
-
 }
