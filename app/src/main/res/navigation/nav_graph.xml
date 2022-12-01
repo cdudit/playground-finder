@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tabBarFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/tabBarFragment"
@@ -39,5 +39,15 @@
         <argument
             android:name="playground"
             app:argType="fr.cdudit.playgroundfinder.models.Record" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="fr.cdudit.playgroundfinder.features.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/navigateToTabBarFragment"
+            app:destination="@id/tabBarFragment" />
     </fragment>
 </navigation>
