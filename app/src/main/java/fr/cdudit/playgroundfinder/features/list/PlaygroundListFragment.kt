@@ -27,6 +27,15 @@ class PlaygroundListFragment : Fragment() {
         return this.binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (this.playgrounds.isNotEmpty()) {
+            this.playgrounds.clear()
+            this.playgrounds.addAll(this.viewModel.mapWithFavorites(requireContext(), this.playgrounds))
+            this.adapter.notifyItemRangeChanged(0, this.playgrounds.size)
+        }
+    }
+
     private fun initListeners() {
         val bottomSheetFragment = PlaygroundListFilterBottomSheetFragment.newInstance { ageMin, ageMax, search ->
             getPlaygrounds(ageMin, ageMax, search)
@@ -54,7 +63,7 @@ class PlaygroundListFragment : Fragment() {
             search,
             onSuccess = { records ->
                 records?.let {
-                    playgrounds.addAll(it)
+                    playgrounds.addAll(this.viewModel.mapWithFavorites(requireContext(), it))
                     this.adapter.notifyItemRangeInserted(0, it.size)
                 }
                 this.binding.progressBar.isVisible = false

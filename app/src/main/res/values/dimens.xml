@@ -58,5 +58,6 @@
     <dimen name="map_bottom_sheet_title_margin_end">8dp</dimen>
     <dimen name="map_bottom_sheet_itinerary_margin_top">16dp</dimen>
     <dimen name="map_bottom_sheet_favorite_width">40dp</dimen>
+    <dimen name="map_bottom_sheet_favorite_margin_end">8dp</dimen>
     <!--endregion-->
 </resources>

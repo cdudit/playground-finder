@@ -90,7 +90,7 @@
                 android:id="@+id/imageButtonFavorite"
                 android:layout_width="@dimen/map_bottom_sheet_favorite_width"
                 android:layout_height="0dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/map_bottom_sheet_favorite_margin_end"
                 android:scaleType="centerInside"
                 android:background="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"

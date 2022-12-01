@@ -26,10 +26,6 @@ class MapViewModel (private val playgroundRepository: PlaygroundRepository) : Vi
         }
     }
 
-    fun getFavorites(context: Context): ArrayList<String> {
-        return PreferencesManager.getFavorites(context)
-    }
-
     fun setFavorites(context: Context, favorites: ArrayList<String>) {
         PreferencesManager.setFavorites(context, favorites)
     }
@@ -37,5 +33,13 @@ class MapViewModel (private val playgroundRepository: PlaygroundRepository) : Vi
     fun getPinIcon(record: Record): BitmapDescriptor {
         val iconId = if (record.isFavorite) R.drawable.ic_pin_favorite else R.drawable.ic_pin
         return BitmapDescriptorFactory.fromResource(iconId)
+    }
+
+    fun mapWithFavorites(context: Context, records: List<Record>): List<Record> {
+        val favoritesId = PreferencesManager.getFavorites(context)
+        return records.map { record ->
+            record.isFavorite = favoritesId.any { record.recordId == it }
+            return@map record
+        }
     }
 }

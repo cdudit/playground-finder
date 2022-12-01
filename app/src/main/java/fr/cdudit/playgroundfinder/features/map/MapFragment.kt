@@ -19,6 +19,7 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     private lateinit var binding: FragmentMapBinding
     private val viewModel: MapViewModel by viewModel()
     private val records = arrayListOf<Record>()
+    private val markers = arrayListOf<Marker>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,7 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
             this.viewModel.getPlaygrounds(
                 onSuccess = { records ->
                     records?.let {
-                        val mapped = this.mapWithFavorites(it)
+                        val mapped = this.viewModel.mapWithFavorites(requireContext(), it)
                         this.records.addAll(mapped)
                         this.addRecordsToMap(map, mapped)
                     }
@@ -48,6 +49,19 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
                     Toast.makeText(requireContext(), it?.string(), Toast.LENGTH_LONG).show()
                 }
             )
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (this.records.isNotEmpty()) {
+            this.records.clear()
+            this.records.addAll(this.viewModel.mapWithFavorites(requireContext(), this.records))
+            this.markers.forEach { marker ->
+                this.records.find { it.recordId == marker.tag }?.let {
+                    marker.setIcon(this.viewModel.getPinIcon(it))
+                }
+            }
         }
     }
 
@@ -70,14 +84,6 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         return false
     }
 
-    private fun mapWithFavorites(records: List<Record>): List<Record> {
-        val favoritesId = this.viewModel.getFavorites(requireContext())
-        return records.map { record ->
-            record.isFavorite = favoritesId.any { record.recordId == it }
-            return@map record
-        }
-    }
-
     private fun addRecordsToMap(map: GoogleMap, records: List<Record>) {
         records.forEach { record ->
             val marker = map.addMarker(
@@ -87,6 +93,7 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
                     .icon(this.viewModel.getPinIcon(record))
             )
             marker?.tag = record.recordId
+            marker?.let { markers.add(it) }
         }
     }
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.cdudit.playgroundfinder.R
 import fr.cdudit.playgroundfinder.databinding.PlaygroundListItemBinding
+import fr.cdudit.playgroundfinder.managers.PreferencesManager
 import fr.cdudit.playgroundfinder.models.Record
 
 class PlaygroundListAdapter(
@@ -22,6 +23,8 @@ class PlaygroundListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Record) {
             binding.textViewItemTitle.text = item.fields.siteName
+            val color = context.getColor(if (item.isFavorite) R.color.yellow else R.color.black)
+            binding.textViewItemTitle.setTextColor(color)
             binding.textViewItemDesc.text = context.getString(
                 R.string.playground_list_item_desc,
                 item.fields.surface.toInt().toString(),
