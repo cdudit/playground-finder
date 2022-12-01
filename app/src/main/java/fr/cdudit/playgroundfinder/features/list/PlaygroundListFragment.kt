@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
+import fr.cdudit.playgroundfinder.R
 import fr.cdudit.playgroundfinder.databinding.FragmentPlaygroundListBinding
 import fr.cdudit.playgroundfinder.features.tabbar.TabBarFragmentDirections
 import fr.cdudit.playgroundfinder.models.Record
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PlaygroundListFragment : Fragment() {
+class PlaygroundListFragment : Fragment(), NavController.OnDestinationChangedListener {
     private lateinit var binding: FragmentPlaygroundListBinding
     private val viewModel: PlaygroundListViewModel by viewModel()
-    private val playgrounds = ArrayList<Record>()
+    private var playgrounds = ArrayList<Record>()
     private lateinit var adapter: PlaygroundListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -24,16 +28,34 @@ class PlaygroundListFragment : Fragment() {
         this.initRecyclerView()
         this.initListeners()
         this.getPlaygrounds()
+        findNavController().addOnDestinationChangedListener(this)
         return this.binding.root
     }
 
+    /**
+     * Update playgrounds favorites when switch tab
+     */
     override fun onResume() {
         super.onResume()
         if (this.playgrounds.isNotEmpty()) {
-            this.playgrounds.clear()
-            this.playgrounds.addAll(this.viewModel.mapWithFavorites(requireContext(), this.playgrounds))
+            this.playgrounds = this.viewModel.mapWithFavorites(requireContext(), this.playgrounds) as ArrayList<Record>
             this.adapter.notifyItemRangeChanged(0, this.playgrounds.size)
         }
+    }
+
+    /**
+     * Update playgrounds favorites when `popBackStack()` executed from `PlaygroundDetailFragment`
+     */
+    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+        if (destination.id == R.id.tabBarFragment && !this.isHidden) {
+            onResume()
+        }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        findNavController().removeOnDestinationChangedListener(this)
     }
 
     private fun initListeners() {

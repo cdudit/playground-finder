@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     private lateinit var binding: FragmentMapBinding
     private val viewModel: MapViewModel by viewModel()
-    private val records = arrayListOf<Record>()
+    private var records = arrayListOf<Record>()
     private val markers = arrayListOf<Marker>()
 
     override fun onCreateView(
@@ -52,11 +52,13 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         }
     }
 
+    /**
+     * Update favorites when switch tab
+     */
     override fun onResume() {
         super.onResume()
         if (this.records.isNotEmpty()) {
-            this.records.clear()
-            this.records.addAll(this.viewModel.mapWithFavorites(requireContext(), this.records))
+            this.records = this.viewModel.mapWithFavorites(requireContext(), this.records) as ArrayList<Record>
             this.markers.forEach { marker ->
                 this.records.find { it.recordId == marker.tag }?.let {
                     marker.setIcon(this.viewModel.getPinIcon(it))
