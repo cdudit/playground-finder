@@ -15,14 +15,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MapDetailBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: PlaygroundMapBottomSheetBinding
     private lateinit var playground: Record
+    private lateinit var onFavoriteClick: (Boolean) -> Unit
     private val viewModel: MapDetailBottomSheetViewModel by viewModel()
 
     companion object {
         const val TAG = "MapDetailBottomSheetFragment"
 
-        fun newInstance(record: Record): MapDetailBottomSheetFragment {
+        fun newInstance(
+            record: Record,
+            onFavoriteClick: (Boolean) -> Unit
+        ): MapDetailBottomSheetFragment {
             return MapDetailBottomSheetFragment().apply {
                 this.playground = record
+                this.onFavoriteClick = onFavoriteClick
             }
         }
     }
@@ -49,6 +54,7 @@ class MapDetailBottomSheetFragment : BottomSheetDialogFragment() {
         this.binding.textViewDetailSurface.text = getString(
             viewModel.getSurfaceResId(), playground.fields.surface.toInt()
         )
+        this.setFavoriteAlpha()
     }
 
     private fun initListeners() {
@@ -63,5 +69,15 @@ class MapDetailBottomSheetFragment : BottomSheetDialogFragment() {
         this.binding.imageButtonShare.setOnClickListener {
             ShareManager.shareViaSMS(requireContext(), geoUri)
         }
+
+        this.binding.imageButtonFavorite.setOnClickListener {
+            this.playground.isFavorite = !this.playground.isFavorite
+            this.setFavoriteAlpha()
+            onFavoriteClick(this.playground.isFavorite)
+        }
+    }
+
+    private fun setFavoriteAlpha() {
+        this.binding.imageButtonFavorite.alpha = if (this.playground.isFavorite) 1f else 0.2f
     }
 }

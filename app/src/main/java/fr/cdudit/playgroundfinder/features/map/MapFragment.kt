@@ -9,17 +9,13 @@ import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import fr.cdudit.playgroundfinder.databinding.FragmentMapBinding
 import fr.cdudit.playgroundfinder.features.map.bottomSheet.MapDetailBottomSheetFragment
 import fr.cdudit.playgroundfinder.models.Record
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
-
     private lateinit var binding: FragmentMapBinding
     private val viewModel: MapViewModel by viewModel()
     private val records = arrayListOf<Record>()
@@ -38,25 +34,59 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         val mapFragment = childFragmentManager.findFragmentById(this.binding.map.id) as SupportMapFragment?
 
         mapFragment?.getMapAsync { map ->
+            this.setupMapUI(map)
+
             this.viewModel.getPlaygrounds(
-                onSuccess = { playgroundApi ->
-                    playgroundApi?.records?.let { records ->
-                        this.records.addAll(records)
-                        records.forEach {
-                            val marker = map.addMarker(
-                                MarkerOptions()
-                                    .position(LatLng(it.fields.geoPoint2d[0], it.fields.geoPoint2d[1]))
-                                    .title(it.fields.siteName)
-                            )
-                            marker?.tag = it.recordId
-                        }
+                onSuccess = { records ->
+                    records?.let {
+                        val mapped = this.mapWithFavorites(it)
+                        this.records.addAll(mapped)
+                        this.addRecordsToMap(map, mapped)
                     }
                 },
                 onError = {
                     Toast.makeText(requireContext(), it?.string(), Toast.LENGTH_LONG).show()
                 }
             )
-            this.setupMapUI(map)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val favoritesId = this.records
+            .filter { it.isFavorite }
+            .map { it.recordId } as ArrayList<String>
+        this.viewModel.setFavorites(requireContext(), favoritesId)
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        records.find { marker.tag == it.recordId }?.let {
+            val bottomSheet = MapDetailBottomSheetFragment.newInstance(it) { newIsFavorite ->
+                it.isFavorite = newIsFavorite
+                marker.setIcon(this.viewModel.getPinIcon(it))
+            }
+            bottomSheet.show(childFragmentManager, MapDetailBottomSheetFragment.TAG)
+        }
+        return false
+    }
+
+    private fun mapWithFavorites(records: List<Record>): List<Record> {
+        val favoritesId = this.viewModel.getFavorites(requireContext())
+        return records.map { record ->
+            record.isFavorite = favoritesId.any { record.recordId == it }
+            return@map record
+        }
+    }
+
+    private fun addRecordsToMap(map: GoogleMap, records: List<Record>) {
+        records.forEach { record ->
+            val marker = map.addMarker(
+                MarkerOptions()
+                    .position(LatLng(record.fields.geoPoint2d[0], record.fields.geoPoint2d[1]))
+                    .title(record.fields.siteName)
+                    .icon(this.viewModel.getPinIcon(record))
+            )
+            marker?.tag = record.recordId
         }
     }
 
@@ -70,13 +100,5 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
         map.uiSettings.isZoomControlsEnabled = true
         map.setOnMarkerClickListener(this)
-    }
-
-    override fun onMarkerClick(marker: Marker): Boolean {
-        records.find { marker.tag == it.recordId }?.let {
-            val bottomSheet = MapDetailBottomSheetFragment.newInstance(it)
-            bottomSheet.show(childFragmentManager, MapDetailBottomSheetFragment.TAG)
-        }
-        return false
     }
 }

@@ -4,17 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class PlaygroundApi(
-    @SerializedName("nhits")        val hitsNumber: Int,
-    @SerializedName("parameters")   val parameters: Parameters,
-    @SerializedName("records")      val records: List<Record>
-) : Serializable
-
-data class Parameters(
-    @SerializedName("dataset")  val dataset: String,
-    @SerializedName("format")   val format: String,
-    @SerializedName("rows")     val rows: Int,
-    @SerializedName("start")    val start: Int,
-    @SerializedName("timezone") val timezone: String
+    @SerializedName("records") val records: List<Record>
 ) : Serializable
 
 data class Record(
@@ -22,7 +12,8 @@ data class Record(
     @SerializedName("fields")           val fields: Fields,
     @SerializedName("geometry")         val geometry: Geometry,
     @SerializedName("record_timestamp") val recordTimestamp: String,
-    @SerializedName("recordid")         val recordId: String
+    @SerializedName("recordid")         val recordId: String,
+    var isFavorite: Boolean = false
 ) : Serializable {
     fun getGoogleMapsUri(): String {
         val lat = this.fields.geoPoint2d[0]

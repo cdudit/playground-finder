@@ -52,8 +52,8 @@ class PlaygroundListFragment : Fragment() {
             ageMin,
             ageMax,
             search,
-            onSuccess = { playgroundApi ->
-                playgroundApi?.records?.let {
+            onSuccess = { records ->
+                records?.let {
                     playgrounds.addAll(it)
                     this.adapter.notifyItemRangeInserted(0, it.size)
                 }
