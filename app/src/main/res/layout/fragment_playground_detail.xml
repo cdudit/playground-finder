@@ -17,10 +17,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/playground_detail_title_margin_end"
-                android:maxLines="1"
                 android:ellipsize="marquee"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@+id/imageButtonBack"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonFavorite"
                 app:layout_constraintStart_toEndOf="@+id/imageButtonBack"
                 app:layout_constraintTop_toTopOf="@+id/imageButtonBack"
                 tools:text="TextView" />
@@ -115,6 +115,20 @@
                 app:layout_constraintBottom_toTopOf="@+id/buttonItinerary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/imageButtonFavorite"
+                android:layout_width="@dimen/playground_detail_favorite_width"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/playground_detail_favorite_margin_end"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="@dimen/playground_detail_favorite_padding"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPlaygroundTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlaygroundTitle"
+                app:srcCompat="@drawable/ic_star" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>

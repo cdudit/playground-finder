@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
@@ -35,13 +36,18 @@ class PlaygroundDetailFragment : Fragment() {
         val geoUri = this.playground.getGoogleMapsUri()
 
         this.binding.imageButtonBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().popBackStack()
         }
         this.binding.buttonItinerary.setOnClickListener {
             requireActivity().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(geoUri)))
         }
         this.binding.buttonShare.setOnClickListener {
             ShareManager.shareViaSMS(requireContext(), geoUri)
+        }
+        this.binding.imageButtonFavorite.setOnClickListener {
+            this.playground.isFavorite = !this.playground.isFavorite
+            this.setFavoriteAlpha()
+            this.viewModel.toggleFavorite(requireContext(), this.playground)
         }
     }
 
@@ -64,6 +70,7 @@ class PlaygroundDetailFragment : Fragment() {
     }
 
     private fun initUI() {
+        this.setFavoriteAlpha()
         this.binding.textViewPlaygroundTitle.text = this.playground.fields.siteName
         this.binding.textViewDetailMinAge.text = getString(
             viewModel.getAgeResId(), playground.fields.ageMin.toInt(), playground.fields.ageMax.toInt()
@@ -74,5 +81,9 @@ class PlaygroundDetailFragment : Fragment() {
         this.binding.textViewDetailSurface.text = getString(
             viewModel.getSurfaceResId(), playground.fields.surface.toInt()
         )
+    }
+
+    private fun setFavoriteAlpha() {
+        this.binding.imageButtonFavorite.alpha = if (this.playground.isFavorite) 1f else 0.2f
     }
 }

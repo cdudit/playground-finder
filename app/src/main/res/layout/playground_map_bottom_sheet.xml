@@ -22,7 +22,7 @@
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/text_size_large"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/imageButtonShare"
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonFavorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="TextView" />
@@ -85,6 +85,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_send" />
+
+            <ImageButton
+                android:id="@+id/imageButtonFavorite"
+                android:layout_width="@dimen/map_bottom_sheet_favorite_width"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/map_bottom_sheet_favorite_margin_end"
+                android:scaleType="centerInside"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonShare"
+                app:layout_constraintTop_toTopOf="@+id/textViewTitle"
+                app:srcCompat="@drawable/ic_star" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
