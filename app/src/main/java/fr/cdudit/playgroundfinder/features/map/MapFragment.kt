@@ -1,11 +1,18 @@
 package fr.cdudit.playgroundfinder.features.map
 
+import android.Manifest
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -15,11 +22,29 @@ import fr.cdudit.playgroundfinder.features.map.bottomSheet.MapDetailBottomSheetF
 import fr.cdudit.playgroundfinder.models.Record
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
+class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener, LocationListener {
+
     private lateinit var binding: FragmentMapBinding
     private val viewModel: MapViewModel by viewModel()
     private var records = arrayListOf<Record>()
+    private lateinit var mapFragment : SupportMapFragment
+    private var actualPosition : Marker? = null
     private val markers = arrayListOf<Marker>()
+    private lateinit var map : GoogleMap
+
+
+
+
+
+    private val requestMultiplePermissions = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+
+        var locationManager = getSystemService(this.requireContext(),LocationManager::class.java) as LocationManager
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5f, this)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,18 +57,28 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(this.binding.map.id) as SupportMapFragment?
+        this.mapFragment = childFragmentManager.findFragmentById(this.binding.map.id) as SupportMapFragment
 
-        mapFragment?.getMapAsync { map ->
+
+        requestMultiplePermissions.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        )
+
+        mapFragment.getMapAsync { map ->
+
+
             this.setupMapUI(map)
-
+            this.map = map
             this.viewModel.getPlaygrounds(
                 onSuccess = { records ->
                     records?.let {
-                        val mapped = this.viewModel.mapWithFavorites(requireContext(), it)
+                        val mapped = this.viewModel.mapWithFavorites(requireContext(), records)
                         this.records.addAll(mapped)
                         this.addRecordsToMap(map, mapped)
                     }
+
                 },
                 onError = {
                     Toast.makeText(requireContext(), it?.string(), Toast.LENGTH_LONG).show()
@@ -99,15 +134,32 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        this.map.clear()
+        this.map.setOnMarkerClickListener(null)
+
+    }
+
     private fun setupMapUI(map: GoogleMap) {
         // Initialisation de la caméra sur Bordeaux
         val cameraPosition = CameraPosition.builder()
             .target(LatLng(44.837789, -0.57918))
-            .zoom(11F)
+            .zoom(13F)
             .build()
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
         map.uiSettings.isZoomControlsEnabled = true
         map.setOnMarkerClickListener(this)
+    }
+
+
+    override fun onLocationChanged(newPosition: Location) {
+            this.actualPosition?.remove()
+            this.actualPosition = map.addMarker(
+                MarkerOptions()
+                    .position(LatLng(newPosition.latitude, newPosition.longitude))
+                    .icon(BitmapDescriptorFactory.fromResource(this.viewModel.getIconRoundMapId()))
+            )
     }
 }

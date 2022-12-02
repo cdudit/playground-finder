@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -21,6 +22,8 @@ class TabBarFragment : Fragment() {
     ): View? {
         this.binding = FragmentTabBarBinding.inflate(layoutInflater, container, false)
         setUpTabBar()
+        //Desactive la possibilité de retourner au SplashScreen
+        this.requireActivity().onBackPressedDispatcher.addCallback(this){}
         return this.binding.root
     }
 

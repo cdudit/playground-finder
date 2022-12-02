@@ -15,6 +15,10 @@ import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 
 class MapViewModel (private val playgroundRepository: PlaygroundRepository) : ViewModel() {
+
+    @DrawableRes
+    fun getIconRoundMapId(): Int = R.drawable.round_map
+
     fun getPlaygrounds(onSuccess: (List<Record>?) -> Unit, onError: (ResponseBody?) -> Unit) {
         viewModelScope.launch {
             val response = playgroundRepository.getPlaygroundList(null, null,null)
