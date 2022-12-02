@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface PlaygroundService {
-    @GET("search/?dataset=bor_airejeux&rows=20")
+    @GET("search/?dataset=bor_airejeux&rows=75")
     suspend fun getPlaygroundList(
         @Query("refine.age_min") ageMin: Int?,
         @Query("refine.age_max") ageMax: Int?,
