@@ -53,7 +53,7 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     }
 
     /**
-     * Update favorites when switch tab
+     * Mise à jour des favoris lorsqu'on revient de tab `List`
      */
     override fun onResume() {
         super.onResume()
@@ -100,7 +100,7 @@ class MapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     }
 
     private fun setupMapUI(map: GoogleMap) {
-        //set camera on Bordeaux
+        // Initialisation de la caméra sur Bordeaux
         val cameraPosition = CameraPosition.builder()
             .target(LatLng(44.837789, -0.57918))
             .zoom(11F)

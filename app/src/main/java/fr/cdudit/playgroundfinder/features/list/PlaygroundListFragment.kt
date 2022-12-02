@@ -33,7 +33,7 @@ class PlaygroundListFragment : Fragment(), NavController.OnDestinationChangedLis
     }
 
     /**
-     * Update playgrounds favorites when switch tab
+     * Mise à jour des playgrounds lorsqu'on revient depuis le tab `Map`
      */
     override fun onResume() {
         super.onResume()
@@ -44,7 +44,7 @@ class PlaygroundListFragment : Fragment(), NavController.OnDestinationChangedLis
     }
 
     /**
-     * Update playgrounds favorites when `popBackStack()` executed from `PlaygroundDetailFragment`
+     * Mise à jour des playgrounds lors de l'exécution de `popBackStack()` depuis `PlaygroundDetailFragment`
      */
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         if (destination.id == R.id.tabBarFragment && !this.isHidden) {
